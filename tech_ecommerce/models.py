@@ -5,7 +5,6 @@ from authenticate.models import Seller, UserProfile
 # Create your models here.
 class Categories(models.Model):
     name = models.CharField(max_length=100)
-    icon = models.ImageField(upload_to='pictures/',max_length=255)
     description = models.TextField(null=True, blank=True)
     total = models.IntegerField(default=0, blank=True)
 
