@@ -10,8 +10,10 @@ For the full list of settings and their values, see
 https://docs.djangoproject.com/en/4.1/ref/settings/
 """
 
+import django_heroku
 from datetime import timedelta
 from pathlib import Path
+
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -26,6 +28,7 @@ SECRET_KEY = 'django-insecure--)bt*^zzzerpxj$x5k#qjx#6*pf%zwd)xe2@%p3*j=0y%#-yap
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = False
 
+# heroku
 ALLOWED_HOSTS = ['127.0.0.1','pbl6-tech-e.herokuapp.com']
 
 
@@ -82,14 +85,26 @@ WSGI_APPLICATION = 'tech_e.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/4.1/ref/settings/#databases
 
+# DATABASES = {
+#     'default': {
+#         'ENGINE': 'django.db.backends.mysql',
+#         'NAME': 'pbl6_tech_e',
+#         'USER': 'root',
+#         'PASSWORD': '123456@Qwert',
+#         'HOST': 'localhost',
+#         'PORT': '3306',
+#     }
+# }
+
+#config Database progressql on heroku
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.mysql',
-        'NAME': 'pbl6_tech_e',
-        'USER': 'root',
-        'PASSWORD': '123456@Qwert',
+        'ENGINE': 'django.db.backends.postgresql_psycopg2',
+        'NAME': 'd7krg5hlsl89tj',
+        'USER': 'chyxlratirqnfd',
+        'PASSWORD': 'bbc9611d99ea54bb64a2cd6296b1dd7b9d8fa578052f119d1dbd2111274a64dd',
         'HOST': 'localhost',
-        'PORT': '3306',
+        'PORT': '5432',
     }
 }
 
@@ -129,6 +144,8 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/4.1/howto/static-files/
 
 STATIC_URL = 'static/'
+
+# staticfile whitenoise
 STATIC_ROOT = BASE_DIR / "staticfiles"
 STATICFILES_STORAGE = "whitenoise.storage.CompressedStaticFilesStorage"
 
@@ -187,3 +204,5 @@ EMAIL_PORT = 587
 EMAIL_USE_TLS = True
 EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
 DEFAULT_FROM_EMAIL = EMAIL_HOST_USER
+
+django_heroku.settings(locals())
